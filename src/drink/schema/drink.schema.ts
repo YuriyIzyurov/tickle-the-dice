@@ -3,21 +3,26 @@ import { HydratedDocument } from 'mongoose';
 import {Specification} from "src/dish/schema/specification.schema";
 import * as mongoose from 'mongoose'
 
-export type DishDocument = HydratedDocument<Dish>;
+export type DrinkDocument = HydratedDocument<Drink>;
+export type PriceType = {
+    ml50: number
+    ml100: number
+    bottle: number
+}
 
 @Schema()
-export class Dish {
+export class Drink {
     @Prop()
     name: string;
 
     @Prop()
     description: string;
 
-    @Prop()
-    price: number;
+    @Prop({type: {ml50: Number, ml100: Number, bottle: Number}})
+    price: PriceType;
 
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Specification'})
     specification: Specification
 }
 
-export const DishSchema = SchemaFactory.createForClass(Dish);
+export const DrinkSchema = SchemaFactory.createForClass(Drink);

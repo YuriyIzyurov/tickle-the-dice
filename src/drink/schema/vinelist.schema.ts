@@ -1,17 +1,17 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument} from 'mongoose';
-import {Dish} from "src/dish/schema/dish.schema";
 import * as mongoose from 'mongoose'
+import {Drink} from "src/drink/schema/drink.schema";
 
-export type SpecificationDocument = HydratedDocument<Specification>;
+export type VineListDocument = HydratedDocument<VineList>;
 
 @Schema()
-export class Specification {
+export class VineList {
     @Prop()
     name: string;
 
-    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Dish'}]})
-    dishes: Dish[];
+    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Drink'}]})
+    drinks: Drink[];
 }
 
-export const SpecificationSchema = SchemaFactory.createForClass(Specification);
+export const VineListSchema = SchemaFactory.createForClass(VineList);

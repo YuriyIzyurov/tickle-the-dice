@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import {MongooseModule} from "@nestjs/mongoose";
 import { Drink, DrinkSchema } from "src/drink/schema/drink.schema";
 import {VineList, VineListSchema} from "src/drink/schema/vinelist.schema";
-import { DrinkController } from "./dish.controller";
+import { DrinkController } from "src/drink/drink.controller";
 import {DrinkService} from "src/drink/drink.service";
 
 

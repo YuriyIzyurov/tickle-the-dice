@@ -1,37 +1,38 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model, ObjectId} from "mongoose";
-import {Dish, DishDocument} from "src/dish/schema/dish.schema";
-import {Specification, SpecificationDocument} from "src/dish/schema/specification.schema";
-import {CreateDishDto} from "src/dish/dto/create-dish.dto";
-import {CreateSpecificationDto} from "src/dish/dto/create-specification.dto";
+import {Drink, DrinkDocument} from "./schema/drink.schema";
+import {VineList, VineListDocument} from "src/drink/schema/vinelist.schema";
+import {CreateDrinkDto} from "./dto/create-drink.dto";
+import {CreateVineListDto} from "src/drink/dto/create-vinelist.dto";
 
 
 @Injectable()
-export class DishService {
-    constructor(@InjectModel(Dish.name) private dishModel: Model<DishDocument>,
-                @InjectModel(Specification.name) private specificationModel: Model<SpecificationDocument>) {}
+export class DrinkService {
+    constructor(@InjectModel(Drink.name) private drinkModel: Model<DrinkDocument>,
+                @InjectModel(VineList.name) private vineListModel: Model<VineListDocument>) {}
 
-    async create(dto: CreateDishDto): Promise<Dish> {
-        const specification = await this.specificationModel.findById(dto.specification)
-        const dish =  await this.dishModel.create({...dto, redactions: 0})
-        specification.dishes.push(dish.id)
-        await specification.save()
-        return dish
+    async create(dto: CreateDrinkDto): Promise<Drink> {
+        try {
+            const vineListItem = await this.vineListModel.findById(dto.specification)
+            const drink =  await this.drinkModel.create({...dto, redactions: 0})
+            vineListItem.drinks.push(drink.id)
+            await vineListItem.save()
+            return drink
+        } catch(e) {
+            console.log(e)
+        }
     }
-    async createSpecification(dto: CreateSpecificationDto): Promise<Specification> {
-        return await this.specificationModel.create({...dto, redactions: 0})
+    async createVineList(dto: CreateVineListDto): Promise<VineList> {
+        return await this.vineListModel.create({...dto, redactions: 0})
     }
-    async getAll(): Promise<Dish[]> {
-        const dishes = await this.dishModel.find()
-        return dishes
+    async getAll(): Promise<VineList[]> {
+        return this.vineListModel.find().populate('drinks');
     }
-    async getOne(id: ObjectId): Promise<Dish> {
-        const dish = await this.dishModel.findById(id)
-        return dish
+    async getOne(id: ObjectId): Promise<Drink> {
+        return this.drinkModel.findById(id);
     }
-    async delete(id: ObjectId): Promise<Dish> {
-        const dish = await this.dishModel.findByIdAndDelete(id)
-        return dish
+    async delete(id: ObjectId): Promise<Drink> {
+        return this.drinkModel.findByIdAndDelete(id)
     }
 }

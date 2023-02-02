@@ -1,3 +1,3 @@
-export class CreateSpecificationDto {
+export class CreateVineListDto {
     readonly name
 }

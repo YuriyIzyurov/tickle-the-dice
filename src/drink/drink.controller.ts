@@ -20,7 +20,7 @@ export class DrinkController {
         return this.drinkService.createVineList(dto)
     }
 
- /*   @Get()
+    @Get()
     getAll() {
         return this.drinkService.getAll()
     }
@@ -33,5 +33,5 @@ export class DrinkController {
     @Delete(':id')
     delete(@Param('id') id: ObjectId) {
         return this.drinkService.delete(id)
-    }*/
+    }
 }
