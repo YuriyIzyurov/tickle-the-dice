@@ -10,15 +10,13 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const dish_module_1 = require("./dish/dish.module");
 const mongoose_1 = require("@nestjs/mongoose");
-const config_1 = require("@nestjs/config");
 const drink_module_1 = require("./drink/drink.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
-            mongoose_1.MongooseModule.forRoot(process.env.DB_URI),
+            mongoose_1.MongooseModule.forRoot('mongodb+srv://batm1x:bmDxd68y3kNaiPh@cluster0.mkweogl.mongodb.net/Cafe?retryWrites=true&w=majority'),
             dish_module_1.DishModule,
             drink_module_1.DrinkModule
         ],
