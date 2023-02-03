@@ -1,7 +1,7 @@
 {
   "version": 2,
   "env": {
-    "DB_URI": "@api-cafe"
+    "DB_URI": "@api_cafe"
   },
   "builds": [
     {
