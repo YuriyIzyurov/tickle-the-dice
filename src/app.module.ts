@@ -6,9 +6,8 @@ import {DrinkModule} from "src/drink/drink.module";
 
 @Module({
    imports: [
-      //ConfigModule.forRoot({envFilePath: '.env', isGlobal: true}),
-      //MongooseModule.forRoot(process.env.DB_URI),
-      MongooseModule.forRoot('mongodb+srv://batm1x:bmDxd68y3kNaiPh@cluster0.mkweogl.mongodb.net/Cafe?retryWrites=true&w=majority'),
+      ConfigModule.forRoot({envFilePath: '.env', isGlobal: true}),
+      MongooseModule.forRoot(process.env.DB_URI),
       DishModule,
       DrinkModule
    ],
