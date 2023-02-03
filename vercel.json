@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "env": {
-    "DB_URI": "@api_cafe"
-  },
   "builds": [
     {
       "src": "src/main.ts",
